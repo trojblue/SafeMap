@@ -25,7 +25,7 @@ const specs = swaggerJsonDoc(SWAGGER_OPTION);
 app.use("/swagger", swaggerUI.serve);
 app.get("/swagger", swaggerUI.setup(specs));
 app.use("/api/v1", apiRoutes.routes);
-//* route have to be the last one here.
+//* / route have to be the last one here.
 app.use("/", htmlRoutes.routes);
 
 //everything are shiny and ready, launch!
