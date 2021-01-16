@@ -10,5 +10,18 @@
 
 
 
+上传:
 
+```bash
+git clone https://github.com/Trojblue/STHacks.git
+git checkout -b dev
+git remote add https://github.com/Trojblue/STHacks.git
+git remote update
+git fetch upstream master
+git rebase upstream/master
+
+git add foo.py
+git commit -m "<name>: <actions>"
+git push -u origin dev 
+```
 
