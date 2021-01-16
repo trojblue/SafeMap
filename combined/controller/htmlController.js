@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const { HTML_DIR } = require("../consts");
+const { HTML_DIR } = require("../config");
 
 const getRoot = async (req, res, next) => {
     try {
