@@ -1,7 +1,7 @@
 {
     "name": "the-map",
-    "version": "1.0.0",
-    "description": "The Toronto Covid",
+    "version": "1.0.3",
+    "description": "The Toronto COVID-19 Realtime Map",
     "main": "app.js",
     "license": "MIT",
     "private": true,

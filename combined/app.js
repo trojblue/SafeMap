@@ -28,6 +28,7 @@ app.use("/api/v1", apiRoutes.routes);
 //* route have to be the last one here.
 app.use("/", htmlRoutes.routes);
 
+//everything are shiny and ready, launch!
 app.listen(PORT, () => {
     console.log(`Site is up on port ${PORT}`);
 });
