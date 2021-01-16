@@ -1,0 +1,10 @@
+html/
+node_modules/
+static/
+
+yarn.lock
+readme.md
+package.json
+.eslintignore
+.eslintrc.js
+.gitignore
