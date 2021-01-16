@@ -1,61 +1,22 @@
 "use strict";
 
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+const { PORT, STATIC_DIR } = require("./consts");
+const htmlRoutes = require("./routes/html-routes");
 
 const app = express();
-const port = 3000;
-const htmlDir = path.join(__dirname, "html");
-const staticDir = path.join(__dirname, "static");
 
-app.use(express.static(staticDir));
+app.use(express.static(STATIC_DIR));
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get("/", function (req, res, next) {
-    const fileName = "index.html";
-    const options = {
-        root: htmlDir,
-        dotfiles: "deny",
-        headers: {
-            "x-timestamp": Date.now(),
-            "x-sent": true,
-        },
-    };
-    res.sendFile(fileName, options, function (err) {
-        if (err) {
-            next(err);
-        } else {
-            console.log("served:", fileName);
-        }
-    });
-});
+app.use("/", htmlRoutes.routes);
 
-app.get("/:file", function (req, res, next) {
-    const fileName = req.params.file;
-    const options = {
-        root: htmlDir,
-        dotfiles: "deny",
-        headers: {
-            "x-timestamp": Date.now(),
-            "x-sent": true,
-        },
-    };
-
-    const exists = fs.existsSync(path.join(htmlDir, fileName));
-    if (exists) {
-        res.sendFile(fileName, options, function (err) {
-            if (err) {
-                next(err);
-            } else {
-                console.log("served:", fileName);
-            }
-        });
-    } else {
-        res.status(404);
-        res.send("File Not Exists");
-    }
-});
-
-app.listen(port, () => {
-    console.log(`Site is up on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Site is up on port ${PORT}`);
 });
