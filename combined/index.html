@@ -61,10 +61,10 @@
                         <div class="col-md-10 offset-md-1" style="margin: 0px;padding-left: 1px;padding-right: 2px;">
                             <div class="card m-auto" style="max-width:850px">
                                 <div class="card-body" style="padding: 15px;padding-top: 12px;padding-right: 12px;padding-bottom: 12px;padding-left: 12px;">
-                                    <form class="d-flex align-items-center"><i class="fas fa-search d-none d-sm-block h4 text-body m-0"></i><input class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search Postaddress" name="searchbar">
+                                    <div class="d-flex align-items-center"><i class="fas fa-search d-none d-sm-block h4 text-body m-0"></i><input class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search Postaddress" name="searchbar" id="searchBarFrozenThrone">
                                         <button
-                                            class="btn btn-success btn-lg" type="submit">Search</button>
-                                    </form>
+                                            class="btn btn-success btn-lg" type="submit" onclick="solveRedict()">Search</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +87,20 @@
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+    //What is the solution? 
+
+    function solveRedict(){
+        
+        
+        var realId = document.getElementById("searchBarFrozenThrone").value;
+    window.location.replace("./map.html?myVar1=" + realId + "#some_id");
+
+
+    }
+    
+
+    </script>
 </body>
 
 </html>

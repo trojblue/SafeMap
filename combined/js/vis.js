@@ -331,7 +331,40 @@ function changeWidgets() {
     });
 }
 
+newNewData = JSON.stringify({ "lac": 60, "lng": 40 });
+
+console.log(newNewData);
+
+function sendRequest() {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "http://localhost:5000/foo",
+        data: JSON.stringify({ "lac": 60, "lng": 40 }),
+        success: function(Adata) {
+            console.log(Adata);
+        }
+    });
+}
+
+function dealWithAnotherPage() {
+
+    var var1 = getQueryStringValue("myVar1");
+    document.getElementById("searchBar").value = var1;
+    var var2 = var1;
+    showTorotoMap(var1);
+};
+
+function getQueryStringValue(key) {
+    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
+
+if (window.location.hash === '#some_id') {
+    dealWithAnotherPage();
+}
+
 
 //Auto-initialization
 showTorotoMap();
 changeWidgets();
+sendRequest();
