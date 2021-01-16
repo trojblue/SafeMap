@@ -320,8 +320,18 @@ function updateTorontoMap(switchingChoice = null) {
 
 }
 
+function changeWidgets() {
+    $.getJSON("https://api.covid19tracker.ca/reports/province/ON", function(data5) {
+        let today = data5[data5.length - 1];
+        let yesterday = data5[data5.length - 2];
+        document.getElementById("total-cases").innerHTML = today["total_cases"];
+        document.getElementById("daily-new-cases").innerHTML = today["total_cases"] - yesterday["total_cases"];
+        document.getElementById("vaccine-rate").innerHTML = today["total_vaccinated"] / 14745040 * 100 + "%";
 
+    });
+}
 
 
 //Auto-initialization
 showTorotoMap();
+changeWidgets();
