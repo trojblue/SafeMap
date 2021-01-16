@@ -1,8 +1,8 @@
 # STHacks
 
-`combined`: 合并各种修改以后的代码放这里
+`combined`: 合并各种修改以后的代码放这里, 当做dev分支用, 主要修改这个
 
-其他文件夹随便用
+其他文件夹: 暂存进度用, 当做git stash用, 随用随建
 
 
 
@@ -10,18 +10,5 @@
 
 
 
-上传:
 
-```bash
-git clone https://github.com/Trojblue/STHacks.git
-git checkout -b dev
-git remote add https://github.com/Trojblue/STHacks.git
-git remote update
-git fetch upstream master
-git rebase upstream/master
-
-git add foo.py
-git commit -m "<name>: <actions>"
-git push -u origin dev 
-```
 
