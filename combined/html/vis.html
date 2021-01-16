@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
 
-<head>
+        <title>Leaflet Web Map</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- reference to Leaflet CSS -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
-<title>Leaflet Web Map</title>
+        <!-- reference to Leaflet JavaScript -->
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
-<!-- reference to Leaflet CSS -->
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <!-- set width and height styles for map -->
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
 
-<!-- reference to Leaflet JavaScript -->
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <h5>Where are you now?</h5>
+            <h5 id="topicOfMap">Filter by district name</h5>
+            <div class="form-inline">
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    id="searchBar"
+                    placeholder="Search"
+                    aria-label="Search"
+                />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">
+                    Search
+                </button>
+            </div>
+        </nav>
 
-<!-- set width and height styles for map -->
-<link rel="stylesheet" href="css/styles.css">
+        <!-- place holder for map -->
+        <div class="row">
+            <div class="col-9"><div id="map"></div></div>
 
+            <div class="col-3">
+                <div>Infection Rate(out of 1)</div>
+                <div id="svg-color-ordinal"></div>
+            </div>
+        </div>
 
-</head>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('default')">
+                show district name
+            </button>
+            <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('testing')">
+                show testing positions
+            </button>
+            <button type="button" class="btn btn-secondary" id="filterByIncreasingRisk">
+                Filter by Increasing Risk
+            </button>
+        </div>
 
-<body>
+        <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+        <script src="./js/d3/d3.js"></script>
+        <script src="https://d3js.org/d3-array.v2.min.js"></script>
+        <script src="https://d3js.org/d3-color.v2.min.js"></script>
+        <script src="https://d3js.org/d3-format.v2.min.js"></script>
+        <script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
+        <script src="https://d3js.org/d3-time.v2.min.js"></script>
+        <script src="https://d3js.org/d3-time-format.v3.min.js"></script>
+        <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 
-
-
-<nav class="navbar navbar-light bg-light">
-<h5> Where are you now? </h5>
-<h5 id="topicOfMap">Filter by district name</h5> 
-  <div class="form-inline">
-    <input class="form-control mr-sm-2" type="search" id="searchBar" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">Search</button>
-  </div>
-</nav>
-
-
-    <!-- place holder for map -->
-    <div class="row">
-    <div class="col-9"><div id="map"></div></div>
-
-    <div class="col-3">
-    <div>Infection Rate(out of 1)</div>
-    <div id="svg-color-ordinal"></div>
-    </div>
-    </div>
-
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('default')">show district name</button>
-  <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('testing')">show testing positions</button>
-  <button type="button" class="btn btn-secondary" id="filterByIncreasingRisk">Filter by Increasing Risk</button>
-</div>
-
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="./js/d3/d3.js"></script>
-<script src="https://d3js.org/d3-array.v2.min.js"></script>
-<script src="https://d3js.org/d3-color.v2.min.js"></script>
-<script src="https://d3js.org/d3-format.v2.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
-<script src="https://d3js.org/d3-time.v2.min.js"></script>
-<script src="https://d3js.org/d3-time-format.v3.min.js"></script>
-<script src="https://d3js.org/d3-scale.v3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
-
-<script src="js/vis.js"></script>
-
-
-</body>
-
+        <script src="js/vis.js"></script>
+    </body>
 </html>
-
