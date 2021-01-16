@@ -30,9 +30,16 @@ function showTorotoMap(nameValue = null) {
     // create map object, tell it to live in 'map' div and give initial latitude, longitude, zoom values
     // pass option to turn scroll wheel zoom off
 
+
     if (nameValue == null) {
         nameValue = "Toronto";
     }
+
+    var nameValue222 = nameValue;
+
+    var nameValue333 = nameValue222.replace(' ', '+')
+
+
 
     if (!nameValue.toLowerCase().includes("toronto")) {
         nameValue += " Toronto";
@@ -122,9 +129,11 @@ function showTorotoMap(nameValue = null) {
                     map.panTo(basicPosition);
 
                     //var newLatLng = new L.LatLng(lat, lng);
+                    /*
                     marker = L.marker([lat, lng], { icon: greenIcon })
                         .bindPopup(popupContent)
                         .addTo(map);
+                        */
 
                     function switcher() {
                         if (switchingData == "default") {
@@ -145,7 +154,7 @@ function showTorotoMap(nameValue = null) {
                                 $.getJSON(urlForCommunity, function(newData) {
                                     var popupModifier = data2[i]["Neighbourhood Name"];
                                     var popupContent = "<strong>Name of Neighborhood</strong><br/>" + popupModifier + "<br/>" + dictForTotal[data2[i]["Neighbourhood ID"]] * 100 + "%";
-                                    console.log(newData);
+                                    //console.log(newData);
                                     let lat1 = newData.results[0].geometry.location.lat;
                                     let lng1 = newData.results[0].geometry.location.lng;
                                     markersForCommunity.push(L.marker([lat1, lng1])
@@ -161,10 +170,25 @@ function showTorotoMap(nameValue = null) {
                             }
                             markersForCommunity = [];
                             d3.csv("./data/assessment_centre_locations.csv").then(dataForTesting => {
+
                                 console.log(dataForTesting);
                                 for (let i = 0; i < dataForTesting.length; i++) {
                                     var popupModifier = dataForTesting[i]["location_name"];
-                                    var popupContent = "<strong>Name of Neighborhood</strong><br/>" + popupModifier + "<br/>" + dataForTesting[i]["address"];
+                                    var res1 = ((dataForTesting[i]["drive_through"]).trim() != "Yes") ? "No" : "Yes";
+                                    var popupContent = "<strong>Name of Testing Place</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" +
+                                        dataForTesting[i]["address"] +
+                                        "<br/><strong> Website: </strong><br/><a href=\"" +
+                                        dataForTesting[i]["website"] +
+                                        "\" target=\"_blank\">" +
+                                        dataForTesting[i]["website"] + "</a>" +
+                                        "<br/><strong> Walk-ins Available: </strong><br/>" +
+                                        dataForTesting[i]["walk_ins"] +
+                                        "<br/><strong> Drive-through Testing Available: </strong><br/>" +
+                                        res1 +
+                                        "<br/>" +
+                                        "Open External Tools(Google Maps): <a href=\"https://www.google.com/maps/search/?api=1&query=" + popupModifier + "+Toronto" + " \"target=\"_blank\">Google Maps</a>";
                                     let lat1 = +dataForTesting[i]["latitude"];
                                     let lng1 = +dataForTesting[i]["longitude"];
                                     markersForCommunity.push(L.marker([lat1, lng1])
@@ -173,12 +197,42 @@ function showTorotoMap(nameValue = null) {
                                 }
 
                             });
+                        } else if (switchingData == "pharmacy") {
+                            for (let i = 0; i < markersForCommunity.length; i++) {
+                                map.removeLayer(markersForCommunity[i]);
+                            }
+                            markersForCommunity = [];
+                            d3.csv("./data/all_pharmacies_in_toronto.csv").then(dataPharmaies => {
+
+                                for (let i = 0; i < dataPharmaies.length; i++) {
+                                    var popupModifier = dataPharmaies[i]["ENGLISH_NAME"];
+                                    var popupContent = "<strong>Name of Pharmacy</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" +
+                                        dataPharmaies[i]["ADDRESS_LINE_1"] +
+                                        "<br/>" +
+                                        "Open External Tools(Google Maps): <a href=\"https://www.google.com/maps/search/?api=1&query=" + popupModifier + "+Toronto" + " \"target=\"_blank\">Google Maps</a>"
+                                    let lat1 = +dataPharmaies[i]["Y"];
+                                    let lng1 = +dataPharmaies[i]["X"];
+                                    markersForCommunity.push(L.marker([lat1, lng1])
+                                        .bindPopup(popupContent)
+                                        .addTo(map));
+                                }
+
+                            });
+
+
                         }
 
                     }
                     //end of switcher
 
                     switcher(switchingData)
+
+                    //var newLatLng = new L.LatLng(lat, lng);
+                    marker = L.marker([lat, lng], { icon: greenIcon })
+                        .bindPopup(popupContent)
+                        .addTo(map);
 
 
                     //console.log(json); // this will show the info it in firebug console
@@ -245,10 +299,22 @@ function updateTorontoMap(switchingChoice = null) {
     if (switchingChoice == null || switchingChoice == "default") {
         var nameValue = document.getElementById("searchBar").value;
         switchingData = "default";
+        document.getElementById("topicOfMap").innerHTML = "Filter by Your District Name";
         showTorotoMap(nameValue);
     } else if (switchingChoice == "testing") {
         switchingData = "testing";
+        var nameValue = document.getElementById("searchBar").value;
+        document.getElementById("topicOfMap").innerHTML = "Filter by Neighboring Testing Areas";
         showTorotoMap(nameValue);
+    } else if (switchingChoice == "pharmacy") {
+        switchingData = "pharmacy";
+        var nameValue = document.getElementById("searchBar").value;
+        showTorotoMap(nameValue);
+        document.getElementById("topicOfMap").innerHTML = "Filter by Nearby Pharmacies";
+    } else if (switchingChoice == "search") {
+        var nameValue = document.getElementById("searchBar").value;
+        showTorotoMap(nameValue);
+        document.getElementById("topicOfMap").innerHTML = "Your Current Location is Shown Below";
     }
 
 
