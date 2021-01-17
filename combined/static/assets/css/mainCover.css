@@ -8,8 +8,11 @@
     padding: 20px 0;
   }
 }
+@media (min-width: 576px){
+  .form-inline .form-control{
+    width:20em!important;
+}
 
-div {
 }
 
 h1.main-title {
