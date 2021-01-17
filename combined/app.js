@@ -13,13 +13,12 @@ const app = express();
 const htmlDir = "./html";
 
 //adding middleware
+//! Notice, all the file under static folder are auto served by the next line
 app.use(express.static(STATIC_DIR));
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/favicon.ico', express.static('/favicon.ico'));
-
 
 //setting up swagger
 const specs = swaggerJsonDoc(SWAGGER_OPTION);
