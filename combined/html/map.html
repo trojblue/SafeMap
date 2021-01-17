@@ -81,13 +81,13 @@
                     placeholder="Address | Postal | Street | community "
                     aria-label="Search"
                 />
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">
                     Search
                 </button>
             </div>
         </nav>
 
-        <div class="legends card"style="position:absolute;z-index:100;top:20em; display:inline; padding:0.5rem; borrder-radius:0.5rem;">
+        <div class="legends card"style="position:absolute;z-index:100;top:20em; display:inline; padding:0.5rem; right:0px;">
             <div style="display: inline;">Infection Rate(out of 1)</div>
             <br>
             <div style="display: inline;" id="svg-color-ordinal" ></div>
@@ -100,15 +100,15 @@
         </div>
 
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('default')">
+            <button type="button" class="btn btn-primary" id="showDistrict" onclick="updateTorontoMap('default')">
                 show district name
             </button>
-            <button type="button" class="btn btn-secondary" id="showDistrict" onclick="updateTorontoMap('testing')">
+            <button type="button" class="btn btn-warning" id="showDistrict" onclick="updateTorontoMap('testing')">
                 show testing positions
             </button>
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-danger"
                 id="filterByIncreasingRisk"
                 onclick="updateTorontoMap('pharmacy')"
             >
@@ -116,7 +116,7 @@
             </button>
             <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-info"
                 id="filterByIncreasingRisk"
                 onclick="updateTorontoMap('subway')"
             >
