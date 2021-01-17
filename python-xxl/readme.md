@@ -11,6 +11,7 @@
 
 1. find nearest 20 hospitals by (x, y) coordinate
 2. output:  (1 shortest distance    2 shortest distance with walk-in     3 lowest infection rate per 1 million people) hospitals
+3. **`data` folder contains updated datasets. please use them for this system to work**
 
 
 
