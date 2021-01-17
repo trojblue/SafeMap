@@ -1,0 +1,30 @@
+{
+    "name": "the-map",
+    "version": "1.0.3",
+    "description": "The Toronto COVID-19 Realtime Map",
+    "main": "app.js",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "format": "prettier --write .",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "firebase": "^8.2.3",
+        "swagger-jsdoc": "^6.0.1",
+        "swagger-ui-express": "^4.1.6"
+    },
+    "devDependencies": {
+        "eslint": "^7.18.0",
+        "eslint-config-prettier": "^7.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "nodemon": "^2.0.7",
+        "prettier": "^2.2.1"
+    }
+}

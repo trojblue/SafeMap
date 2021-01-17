@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <title>认真首页</title>
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="assets/fonts/ionicons.min.css" />
+        <link rel="stylesheet" href="assets/css/Footer-Clean.css" />
+        <link rel="stylesheet" href="assets/css/Login-Form-Clean-1.css" />
+        <link rel="stylesheet" href="assets/css/Login-Form-Clean.css" />
+        <link rel="stylesheet" href="assets/css/mainCover.css" />
+        <link rel="stylesheet" href="assets/css/Map-Clean.css" />
+        <link rel="stylesheet" href="assets/css/Navigation-with-Button.css" />
+        <link rel="stylesheet" href="assets/css/Search-Input-Responsive-with-Icon.css" />
+        <link rel="stylesheet" href="assets/css/styles.css" />
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+            <div class="container">
+                <a class="navbar-brand" href="./index.html">theMap</a
+                ><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+                    <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./map.html">Map</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./support.html">Support</a>
+                        </li>
+                        <li class="nav-item"></li>
+                    </ul>
+                    <span class="navbar-text actions">
+                        <a class="login" href="login.html">Log In</a
+                        ><a class="btn btn-light action-button" role="button" href="signup.html">Sign Up</a></span
+                    >
+                </div>
+            </div>
+        </nav>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="main-title">Toronto Covid <br />Intelligence</h1>
+                        <h5 class="map-code">The Map v1</h5>
+                        <div>
+                            <br />
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-2">icon1</div>
+                                    <div class="col">
+                                        Plan your trips and get minimum exposure of public during your essential trips
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-2">icon2</div>
+                                    <div class="col">
+                                        Get up-to date covid intelligence, and get to fetch a covid-test quick.
+                                    </div>
+                                </div>
+
+                                <br />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-right: -76px; margin-left: 0px">
+                            <div
+                                class="col-md-10 offset-md-1"
+                                style="margin: 0px; padding-left: 1px; padding-right: 2px"
+                            >
+                                <div class="card m-auto" style="max-width: 850px">
+                                    <div
+                                        class="card-body"
+                                        style="
+                                            padding: 15px;
+                                            padding-top: 12px;
+                                            padding-right: 12px;
+                                            padding-bottom: 12px;
+                                            padding-left: 12px;
+                                        "
+                                    >
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-search d-none d-sm-block h4 text-body m-0"></i
+                                            ><input
+                                                class="form-control form-control-lg flex-shrink-1 form-control-borderless"
+                                                type="search"
+                                                placeholder="Search Postaddress"
+                                                name="searchbar"
+                                                id="searchBarFrozenThrone"
+                                            />
+                                            <button
+                                                class="btn btn-success btn-lg"
+                                                type="submit"
+                                                onclick="solveRedict()"
+                                            >
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mapHome" style="width: 100%; overflow: hidden; margin-top: 145px">
+                            <div class="mapaItem">
+                                <iframe
+                                    width="500"
+                                    height="480"
+                                    frameborder="0"
+                                    scrolling="yes"
+                                    marginheight="0"
+                                    marginwidth="0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCE49BN6D8b2asUONTB1kInR22mJ7iCJEQ&amp;q=Toronto%2C+Canada&amp;zoom=10;output=embed"
+                                    frameborder="0"
+                                    style="
+                                        border: 0;
+                                        margin-bottom: -20px;
+                                        margin-top: -108px;
+                                        margin-left: -100px;
+                                        margin-right: -31px;
+                                    "
+                                >
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            //What is the solution?
+
+            function solveRedict() {
+                var realId = document.getElementById("searchBarFrozenThrone").value;
+                window.location.replace("./map.html?myVar1=" + realId + "#some_id");
+            }
+        </script>
+    </body>
+</html>
