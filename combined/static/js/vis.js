@@ -107,15 +107,6 @@ function showTorotoMap(nameValue = null) {
                         counter++;
                     }
 
-                    /*
-                    L.geoJson(myLines, {
-                            style: myStyle,
-                            onEachFeature: function(feature, layer) {
-                                layer.bindTooltip("<h4>" + feature.properties.AREA_S_CD + "</h4>");
-                            }
-                        })
-                        .addTo(map);
-                        */
 
                     //use data
                     //basicPosition = [data.results[0].geometry.location.lat, data.results.geometry.location.lng];
@@ -129,11 +120,6 @@ function showTorotoMap(nameValue = null) {
                     map.panTo(basicPosition);
 
                     //var newLatLng = new L.LatLng(lat, lng);
-                    /*
-                    marker = L.marker([lat, lng], { icon: greenIcon })
-                        .bindPopup(popupContent)
-                        .addTo(map);
-                        */
 
                     function switcher() {
                         if (switchingData == "default") {
@@ -217,6 +203,116 @@ function showTorotoMap(nameValue = null) {
                                     markersForCommunity.push(L.marker([lat1, lng1])
                                         .bindPopup(popupContent)
                                         .addTo(map));
+                                }
+
+                            });
+
+
+                        } else if (switchingData == "subway") {
+                            for (let i = 0; i < markersForCommunity.length; i++) {
+                                map.removeLayer(markersForCommunity[i]);
+                            }
+                            markersForCommunity = [];
+
+
+                            d3.csv("./data/bloor-danforth-NAD83.csv").then(dataSubwayTwo => {
+
+                                for (let i = 0; i < dataSubwayTwo.length; i++) {
+                                    var popupModifier = dataSubwayTwo[i]["station_name"];
+                                    var popupContent = "<strong>Name of the Station</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" + "Line 2";
+
+                                    let lat1 = +dataSubwayTwo[i]["X"];
+                                    let lng1 = +dataSubwayTwo[i]["Y"];
+                                    /*
+                                    markersForCommunity.push(L.marker([lat1, lng1])
+                                        .bindPopup(popupContent)
+                                        .addTo(map));
+                                        */
+
+                                    var circleMarker = L.circleMarker([lat1, lng1], {
+                                            color: 'green',
+                                            opacity: 0.8
+                                        }).bindPopup(popupContent)
+                                        .addTo(map);
+                                }
+
+                            });
+
+
+
+                            d3.csv("./data/srt-NAD83.csv").then(dataSubwayThree => {
+
+                                for (let i = 0; i < dataSubwayThree.length; i++) {
+                                    var popupModifier = dataSubwayThree[i]["station_name"];
+                                    var popupContent = "<strong>Name of the Station</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" + "Line 3";
+
+                                    let lat1 = +dataSubwayThree[i]["X"];
+                                    let lng1 = +dataSubwayThree[i]["Y"];
+                                    /*
+                                    markersForCommunity.push(L.marker([lat1, lng1])
+                                        .bindPopup(popupContent)
+                                        .addTo(map));
+                                        */
+
+                                    var circleMarker = L.circleMarker([lat1, lng1], {
+                                            color: 'blue',
+                                            opacity: 0.8
+                                        }).bindPopup(popupContent)
+                                        .addTo(map);
+                                }
+
+                            });
+
+                            d3.csv("./data/yonge-university-spadina-NAD83.csv").then(dataSubwayOnce => {
+
+                                for (let i = 0; i < dataSubwayOnce.length; i++) {
+                                    var popupModifier = dataSubwayOnce[i]["station_name"];
+                                    var popupContent = "<strong>Name of the Station</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" + "Line 1";
+
+                                    let lat1 = +dataSubwayOnce[i]["X"];
+                                    let lng1 = +dataSubwayOnce[i]["Y"];
+                                    /*
+                                    markersForCommunity.push(L.marker([lat1, lng1])
+                                        .bindPopup(popupContent)
+                                        .addTo(map));
+                                        */
+
+                                    var circleMarker = L.circleMarker([lat1, lng1], {
+                                            color: 'yellow',
+                                            opacity: 0.8
+                                        }).bindPopup(popupContent)
+                                        .addTo(map);
+                                }
+
+                            });
+
+                            d3.csv("./data/sheppard-yonge-NAD83.csv").then(dataSubwayFour => {
+
+                                for (let i = 0; i < dataSubwayFour.length; i++) {
+                                    var popupModifier = dataSubwayFour[i]["station_name"];
+                                    var popupContent = "<strong>Name of the Station</strong><br/>" +
+                                        popupModifier +
+                                        "<br/>" + "Line 4";
+
+                                    let lat1 = +dataSubwayFour[i]["X"];
+                                    let lng1 = +dataSubwayFour[i]["Y"];
+                                    /*
+                                    markersForCommunity.push(L.marker([lat1, lng1])
+                                        .bindPopup(popupContent)
+                                        .addTo(map));
+                                        */
+
+                                    var circleMarker = L.circleMarker([lat1, lng1], {
+                                            color: "purple",
+                                            opacity: 0.8
+                                        }).bindPopup(popupContent)
+                                        .addTo(map);
                                 }
 
                             });
@@ -311,6 +407,11 @@ function updateTorontoMap(switchingChoice = null) {
         var nameValue = document.getElementById("searchBar").value;
         showTorotoMap(nameValue);
         document.getElementById("topicOfMap").innerHTML = "Filter by Nearby Pharmacies";
+    } else if (switchingChoice == "subway") {
+        var nameValue = document.getElementById("searchBar").value;
+        switchingData = "subway";
+        showTorotoMap(nameValue);
+        document.getElementById("topicOfMap").innerHTML = "Filter by Subways";
     } else if (switchingChoice == "search") {
         var nameValue = document.getElementById("searchBar").value;
         showTorotoMap(nameValue);
