@@ -29,6 +29,13 @@ def get_data():
     return Xtrain_all, Ttrain_all
 
 
+def get_classifier():
+    Xtrain, Ttrain = get_data()
+    k=21    # 达到99.99%置信度的最小值; k越小速度越快
+    clf = KNeighborsClassifier(k)
+    clf.fit(Xtrain, Ttrain)
+    return clf
+
 def get_community(clf, coords):
     """clf: classifier
     coords: (x, y)
@@ -53,12 +60,7 @@ def get_community_auto(coords):
 
 
 if __name__ == '__main__':
-    # Xtrain:(n, 2)array   Ttrain:[str]
-    Xtrain, Ttrain = get_data()
-
-    k=21    # 达到99.99%置信度的最小值; k越小速度越快
-    clf = KNeighborsClassifier(k)
-    clf.fit(Xtrain, Ttrain)
+    clf = get_classifier()
 
     pred = get_community(clf, (-79.4, 43.7))
     print(pred)
