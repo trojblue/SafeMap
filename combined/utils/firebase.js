@@ -16,22 +16,47 @@ const saltedHash = function (text) {
     return crypto.createHmac("sha256", SALT).update(text).digest("base64");
 };
 
-const aesEncrypt = function (data, iv) {
-    const cipher = crypto.createCipheriv("aes-256-gcm", SALT.substr(0, 32), iv.substr(0, 16));
-    const crypted = cipher.update(data);
-    return crypted + cipher.final("base64");
-};
+const db = Firebase.firestore();
 
-const aesDecrypt = function (data, iv) {
-    const decipher = crypto.createDecipheriv("aes-256-gcm", SALT.substr(0, 32), iv.substr(0, 16));
-    const crypted = decipher.update(data);
-    return crypted + decipher.final("base64");
-};
+async function tokenCheck(token, email) {
+    try {
+        const id = token;
+        const users = db.collection("user").doc(id);
+        const query = await users
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    if (doc.data().name == email) {
+                        return true;
+                    }
+                }
+                return false;
+            })
+            .catch((err) => {
+                console.log("error with database", err);
+            });
+        return query;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+async function isLogin(req, res, next) {
+    const { Token } = req.signedCookies;
+    const { User } = req.cookies;
+    if (Token && User && (await tokenCheck(Token, User))) {
+        next();
+    } else {
+        res.redirect("/login");
+        res.end();
+    }
+}
 
 module.exports = {
     Firebase,
-    db: Firebase.firestore(),
+    db,
     saltedHash,
-    aesDecrypt,
-    aesEncrypt,
+    tokenCheck,
+    isLogin,
 };
