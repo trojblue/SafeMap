@@ -22,9 +22,9 @@ async function tokenCheck(token, email) {
     }
 }
 
-function isLogin(req, res, next) {
+async function isLogin(req, res, next) {
     const { Token } = req.cookies;
-    if (Token && tokenCheck(Token)) {
+    if (Token && (await tokenCheck(Token))) {
         next();
     } else {
         res.redirect("/login");
