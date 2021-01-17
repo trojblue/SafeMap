@@ -3,12 +3,32 @@
 const { LoginModel, SignUpModel } = require("../model/authModel");
 const { saltedHash, db, aesDecrypt, aesEncrypt } = require("../utils/firebase");
 
+async function tokenCheck(token, email) {
+    try {
+        const id = aesDecrypt(token, saltedHash(email));
+        const users = db.collection("user").doc(id);
+        const query = await users
+            .get()
+            .then((doc) => {
+                return doc.exists;
+            })
+            .catch((err) => {
+                console.log("error with database", err);
+            });
+        return query;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 function isLogin(req, res, next) {
     const { Token } = req.cookies;
-    if (Token) {
+    if (Token && tokenCheck(Token)) {
         next();
     } else {
         res.redirect("/login");
+        res.end();
     }
 }
 
@@ -39,6 +59,7 @@ const postLogin = async (req, res, next) => {
             const id = record.id;
             console.log(`User ${logInfo.email} with doc id ${id} logged in successfully`);
             res.cookie("Token", aesEncrypt(id, saltedHash(logInfo.email)));
+            res.cookie("User", logInfo.email);
             res.redirect("/map");
             res.end();
         } else {
@@ -80,4 +101,6 @@ const postSignUp = async (req, res, next) => {
 module.exports = {
     postLogin,
     postSignUp,
+    tokenCheck,
+    isLogin,
 };
