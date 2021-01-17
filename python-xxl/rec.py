@@ -2,7 +2,7 @@ import csv
 import math
 import knn, flask
 from flask import request, jsonify
-
+from flask_cors import CORS
 
 HOSPITALS = "./data/all_hospitals_in_toronto.csv"
 CASES = "./data/covid_cases_total.csv"
@@ -134,10 +134,17 @@ def get_recommend(coord):
 def run_flask_server():
     app = flask.Flask(__name__)
     app.config["DEBUG"] = True
+    CORS(app)
 
-    @app.route('/recommend', methods=['POST'])
+    # @app.route('/foo', methods=['POST'])
+    # def foo():
+    #     response = flask.jsonify({'result': request.json})
+    #     response.headers.add('Access-Control-Allow-Origin', '*')
+    #     return response
+
+    @app.route('/foo', methods=['POST'])
     def recommend():
-        x, y = request.json['X'], request.json['Y']
+        x, y = request.json['lac'], request.json['lng']     #TODO: 记得改回X和Y
         recommends = get_recommend((float(x), float(y)))
 
         response = flask.jsonify({'result': {
