@@ -7,8 +7,8 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerJsonDoc = require("swagger-jsdoc");
 
 const { PORT, STATIC_DIR, SWAGGER_OPTION } = require("./config");
-const htmlRoutes = require("./routes/htmlRoutes");
 const apiRoutes = require("./routes/apiRoutes");
+const authRoutes = require("./routes/authRoutes");
 const app = express();
 const htmlDir = "./html";
 
@@ -26,6 +26,7 @@ const specs = swaggerJsonDoc(SWAGGER_OPTION);
 app.use("/swagger", swaggerUI.serve);
 app.get("/swagger", swaggerUI.setup(specs));
 app.use("/api/v1", apiRoutes.routes);
+app.use("/", authRoutes.routes);
 //* / route have to be the last one here.
 app.use(express.static(htmlDir, { extensions: ["html"] }));
 
