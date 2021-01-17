@@ -27,7 +27,7 @@ app.use("/swagger", swaggerUI.serve);
 app.get("/swagger", swaggerUI.setup(specs));
 app.use("/api/v1", apiRoutes.routes);
 //* / route have to be the last one here.
-app.use(express.static(htmlDir, { extensions: ['html'] }));
+app.use(express.static(htmlDir, { extensions: ["html"] }));
 
 //everything are shiny and ready, launch!
 app.listen(PORT, () => {

@@ -67,12 +67,14 @@
                 </div>
             </div>
         </nav>
-        <h2 style="text-align: center" class="headings">COVID Toolkit Map</h1>
+        <h2 style="text-align: center" class="headings">COVID Toolkit Map</h2>
 
         <div id="some_id"></div>
 
         <nav class="navbar navbar-light bg-light">
-            <h3 id="topicOfMap" style="text-align: center; justify: center" align="center">Filter by Your District Name</h3>
+            <h3 id="topicOfMap" style="text-align: center; justify: center" align="center">
+                Filter by Your District Name
+            </h3>
             <div class="form-inline">
                 <input
                     class="form-control mr-sm-2"
@@ -87,12 +89,14 @@
             </div>
         </nav>
 
-        <div class="legends card"style="position:absolute;z-index:100;top:20em; display:inline; padding:0.5rem; right:0px;">
-            <div style="display: inline;">Infection Rate(out of 1)</div>
-            <br>
-            <div style="display: inline;" id="svg-color-ordinal" ></div>
+        <div
+            class="legends card"
+            style="position: absolute; z-index: 100; top: 20em; display: inline; padding: 0.5rem; right: 0px"
+        >
+            <div style="display: inline">Infection Rate(out of 1)</div>
+            <br />
+            <div style="display: inline" id="svg-color-ordinal"></div>
         </div>
-
 
         <!-- place holder for map -->
         <div class="container">
@@ -114,17 +118,12 @@
             >
                 show pharmacies around you
             </button>
-            <button
-                type="button"
-                class="btn btn-info"
-                id="filterByIncreasingRisk"
-                onclick="updateTorontoMap('subway')"
-            >
+            <button type="button" class="btn btn-info" id="filterByIncreasingRisk" onclick="updateTorontoMap('subway')">
                 show subway stations
             </button>
         </div>
         <div></div>
-                <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest')">
                 Recommend By Nearest
             </button>
