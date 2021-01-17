@@ -9,6 +9,8 @@ const cookieParser = require("cookie-parser");
 const { PORT, STATIC_DIR, SWAGGER_OPTION, SALT } = require("./config");
 const apiRoutes = require("./routes/apiRoutes");
 const authRoutes = require("./routes/authRoutes");
+const { serveMap } = require("./controller/mapController");
+const { isLogin } = require("./utils/firebase");
 const app = express();
 const htmlDir = "./html";
 
@@ -28,6 +30,7 @@ app.use("/swagger", swaggerUI.serve);
 app.get("/swagger", swaggerUI.setup(specs));
 app.use("/api/v1", apiRoutes.routes);
 app.use("/", authRoutes.routes);
+app.get("/map", isLogin, serveMap);
 //* / route have to be the last one here.
 app.use(express.static(htmlDir, { extensions: ["html"] }));
 
