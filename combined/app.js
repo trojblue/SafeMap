@@ -10,6 +10,7 @@ const { PORT, STATIC_DIR, SWAGGER_OPTION } = require("./config");
 const htmlRoutes = require("./routes/htmlRoutes");
 const apiRoutes = require("./routes/apiRoutes");
 const app = express();
+const htmlDir = "./html";
 
 //adding middleware
 app.use(express.static(STATIC_DIR));
@@ -26,7 +27,7 @@ app.use("/swagger", swaggerUI.serve);
 app.get("/swagger", swaggerUI.setup(specs));
 app.use("/api/v1", apiRoutes.routes);
 //* / route have to be the last one here.
-app.use("/", htmlRoutes.routes);
+app.use(express.static(htmlDir, { extensions: ['html'] }));
 
 //everything are shiny and ready, launch!
 app.listen(PORT, () => {
