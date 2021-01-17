@@ -85,9 +85,66 @@ const { getUsername } = require("../controller/userInfoController");
  */
 router.get("/username", getUsername);
 
-//! this two lines works after firebase is properly configured
-//！ const exampleFirebaseRoutes = require("./exampleFirebaseRoutes");
-//！ router.use("/", exampleFirebaseRoutes);
+const { addLocation, getLocations } = require("../controller/locationController");
+
+/**
+ * @swagger
+ * /location:
+ *   get:
+ *     description: Get the list of user favorite locations.
+ *     tags:
+ *       - UserInfo
+ *     security:
+ *       - cookieAuth: []
+ *       - cookieName: []
+ *     responses:
+ *       "200":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  code:
+ *                    type: number
+ *                    oneOf:
+ *                      - 0: Success
+ *                      - 100: Not Logged In
+ *                  data:
+ *                    type: list
+ *                    example:
+ *                      [
+ *                          {
+ *                              longitude: 123,
+ *                              latitude: 456,
+ *                              name: "fake"
+ *                          }
+ *                      ]
+ */
+router.get("/location", getLocations);
+/**
+ * @swagger
+ * /location:
+ *   post:
+ *     description: Add 1 location to user's favorite
+ *     tags:
+ *       - UserInfo
+ *     security:
+ *       - cookieAuth: []
+ *       - cookieName: []
+ *     responses:
+ *       "200":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  code:
+ *                    type: number
+ *                    oneOf:
+ *                      - 0: Success
+ *                      - 100: Not Logged In
+ */
+router.post("/location", addLocation);
 
 module.exports = {
     routes: router,
