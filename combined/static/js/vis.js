@@ -541,7 +541,7 @@ function sendRequest(requestDetails) {
 
 function dealWithAnotherPage() {
 
-    var var1 = getQueryStringValue("myVar1");
+    var var1 = getQueryStringValue("location");
     document.getElementById("searchBar").value = var1;
     var var2 = var1;
     showTorotoMap(var1);
@@ -551,7 +551,7 @@ function getQueryStringValue(key) {
     return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
 
-if (window.location.hash === '#some_id') {
+if (window.location.hash === '#s') {
     dealWithAnotherPage();
 }
 
