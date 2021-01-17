@@ -27,6 +27,21 @@ h1.main-title {
   margin-top: 1.4em;
 }
 
+h2.headings {
+  font-family: 'Roboto';
+  /*width: 450px;*/
+  /*height: 168px;*/
+  /*left: 116px;*/
+  top: 30px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 64px;
+  color: #13262F;
+  margin-top: 0.4em;
+}
+
 h5.map-code {
   position: absolute;
   /*width: 131px;*/
