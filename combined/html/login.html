@@ -34,8 +34,8 @@
                         <li class="nav-item"></li>
                     </ul>
                     <span class="navbar-text actions">
-                        <a class="login" href="login">Log In</a
-                        ><a class="btn btn-light action-button" role="button" href="signup">Sign Up</a></span
+                        <a class="login" href="login" id="loginButton">Log In</a
+                        ><a class="btn btn-light action-button" role="button" href="signup" id="signupButton">Sign Up</a></span
                     >
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <input id="password-input" class="form-control" type="password" name="password" placeholder="Password" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit" onclick="CallWebAPI()">Log In</button>
+                    <button class="btn btn-primary btn-block" type="submit" onclick="SubmitLogin()">Log In</button>
                 </div>
                 <a class="forgot" href="#">Forgot your email or password?</a>
             </form>

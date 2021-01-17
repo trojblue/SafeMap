@@ -29,3 +29,10 @@ function SubmitLogin() {
     }
     });
 }
+
+function changeLoginStatus(){
+    document.getElementById("loginButton")
+}
+
+//Auto-initialization
+changeLoginStatus();
