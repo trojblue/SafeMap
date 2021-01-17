@@ -88,6 +88,12 @@ div.legends{
   display:inline;
 }
 
+
+.features-clean .item .icon{
+  color: #66d7d7;
+}
+
+
 @media (max-width:767px) {
   .contact-clean {
     padding: 20px 0;
