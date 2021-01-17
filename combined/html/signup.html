@@ -34,8 +34,8 @@
                         <li class="nav-item"></li>
                     </ul>
                     <span class="navbar-text actions">
-                        <a class="login" href="login">Log In</a
-                        ><a class="btn btn-light action-button" role="button" href="signup">Sign Up</a></span
+                        <a class="login" href="login" id="loginButton">Log In</a
+                        ><a class="btn btn-light action-button" role="button" href="signup" id="signupButton">Sign Up</a></span
                     >
                 </div>
             </div>
@@ -48,20 +48,21 @@
                     <i class="icon ion-ios-navigate"></i>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="Email" />
+                    <input id="signup-email" class="form-control" type="email" name="email" placeholder="Email" />
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password" />
+                    <input id="signup-passwd"class="form-control" type="password" name="password" placeholder="Password" />
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Confirm Password" />
+                    <input id="signup-passwd2"class="form-control" type="password" name="password" placeholder="Confirm Password" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+                    <button class="btn btn-primary btn-block" type="submit" onclick="SubmitSignup()">Create Account</button>
                 </div>
             </form>
         </div>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/auth.js"></script>
     </body>
 </html>
