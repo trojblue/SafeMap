@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-        <title>theMap | Map</title>
+        <title>SafeMap | Map</title>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
         <link rel="stylesheet" href="assets/fonts/ionicons.min.css" />
@@ -43,12 +43,13 @@
 
         <!-- set width and height styles for map -->
         <link rel="stylesheet" href="css/styles.css" />
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon"/>
     </head>
 
     <body>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container">
-                <a class="navbar-brand" href="./index">theMap</a
+                <a class="navbar-brand" href="./index">SafeMap</a
                 ><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                     <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
                 </button>
@@ -75,6 +76,7 @@
             <h3 id="topicOfMap" style="text-align: center; justify: center" align="center">
                 Filter by Your District Name
             </h3>
+
             <div class="form-inline">
                 <input
                     class="form-control mr-sm-2"
@@ -83,7 +85,7 @@
                     placeholder="Address | Postal | Street | community "
                     aria-label="Search"
                 />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">
+                <button class="btn btn-success my-2 my-sm-0" type="submit" onclick="updateTorontoMap('search')">
                     Search
                 </button>
             </div>
@@ -100,40 +102,51 @@
 
         <!-- place holder for map -->
         <div class="container">
-            <div class="col"><div id="map" style="width: 1024px; height: 600px"></div></div>
+          <div class="col"><div id="map" style="width: 1024px; height: 600px"></div></div>
+            <!-- MAP BUTTONS -->
+            <h5>Location services:</h5>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary" id="showDistrict" onclick="updateTorontoMap('default')">
+                    show districts
+                </button>
+                <button type="button" class="btn btn-warning" id="showDistrict" onclick="updateTorontoMap('testing')">
+                    show testing sites
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="filterByIncreasingRisk"
+                    onclick="updateTorontoMap('pharmacy')"
+                >
+                    show pharmacies
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-info"
+                    id="filterByIncreasingRisk"
+                    onclick="updateTorontoMap('subway')"
+                >
+                    show subway stations
+                </button>
+            </div>
+            <h5>Testing Center Recommendations:</h5>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest')">
+                    | Closest
+                </button>
+                <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest_safest')">
+                    | Lowest risk nearby
+                </button>
+                <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest_walking')">
+                    | Nearest Walk-in sites
+                </button>
+            </div>
+            <br><br>
         </div>
 
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary" id="showDistrict" onclick="updateTorontoMap('default')">
-                show district name
-            </button>
-            <button type="button" class="btn btn-warning" id="showDistrict" onclick="updateTorontoMap('testing')">
-                show testing positions
-            </button>
-            <button
-                type="button"
-                class="btn btn-danger"
-                id="filterByIncreasingRisk"
-                onclick="updateTorontoMap('pharmacy')"
-            >
-                show pharmacies around you
-            </button>
-            <button type="button" class="btn btn-info" id="filterByIncreasingRisk" onclick="updateTorontoMap('subway')">
-                show subway stations
-            </button>
-        </div>
-        <div></div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest')">
-                Recommend By Nearest
-            </button>
-            <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest_safest')">
-                Recommend By Nearest-safest
-            </button>
-            <button type="button" class="btn btn-secondary" id="sendFoo" onclick="sendRequest('nearest_walking')">
-                Recommend By Nearest Walkin
-            </button>
-        </div>
+
+
+
 
         <div class="container">
             <div class="row">

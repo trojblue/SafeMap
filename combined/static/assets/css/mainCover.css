@@ -76,6 +76,10 @@ h5.map-code {
   border-radius: 20px;
 }
 
+.btn-success{
+    background-color: #66d7d7!important;
+}
+
 div.frontMap {
   margin-top: 6em;
 }
@@ -83,6 +87,12 @@ div.frontMap {
 div.legends{
   display:inline;
 }
+
+
+.features-clean .item .icon{
+  color: #66d7d7;
+}
+
 
 @media (max-width:767px) {
   .contact-clean {

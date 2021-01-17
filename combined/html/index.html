@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-        <title>theMap | Home</title>
+        <title>SafeMap | Home</title>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
         <link rel="stylesheet" href="assets/fonts/ionicons.min.css" />
@@ -15,12 +15,14 @@
         <link rel="stylesheet" href="assets/css/Navigation-with-Button.css" />
         <link rel="stylesheet" href="assets/css/Search-Input-Responsive-with-Icon.css" />
         <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon"/>
+
     </head>
 
     <body>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container">
-                <a class="navbar-brand" href="./index">theMap</a
+                <a class="navbar-brand" href="./index">SafeMap</a
                 ><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
                     <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
                 </button>
@@ -43,7 +45,7 @@
             <div class="container front-box">
                 <div class="row">
                     <div class="col-md-7 offset-md-1">
-                        <h5 class="map-code">The Map v1</h5>
+                        <h5 class="map-code">SafeMap v1</h5>
                         <h1 class="main-title">Toronto Covid <br />Intelligence</h1>
 
                         <div>
@@ -108,10 +110,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <p>or: <a href="./map"><u>go to map directly</u></a></p>
                         </div>
                     </div>
                     <div class="col"></div>
+
                 </div>
+                <div style="text-align:right;position: absolute;bottom: 10px; right: 10px; "> 
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/Trojblue/STHacks"> view on github<a/>
+                </div>
+
             </div>
             <iframe
                 class="bg-map"
@@ -128,7 +137,7 @@
 
             function solveRedict() {
                 var realId = document.getElementById("searchBarFrozenThrone").value;
-                window.location.replace("./map.html?myVar1=" + realId + "#some_id");
+                window.location.replace("./map?location=" + realId + "#s");
             }
         </script>
     </body>
