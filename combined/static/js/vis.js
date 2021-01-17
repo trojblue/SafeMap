@@ -4,7 +4,7 @@
 
 //Basic initializations
 
-var basicPosition = [43.6532, -79.3832];
+var basicPosition = [-79.3832, 43.6532];
 
 var switchingData = "default";
 
@@ -18,6 +18,26 @@ var greenIcon = new L.Icon({
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
 });
+
+var goldIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+var positionAnalysisFoo = [];
 
 var marker; // The only marker
 
@@ -49,6 +69,8 @@ function showTorotoMap(nameValue = null) {
     var entrance = encodeURIComponent(nameValue.trim())
     var url = "https://maps.googleapis.com/maps/api/geocode/json?&address=" + entrance + "&key=AIzaSyCE49BN6D8b2asUONTB1kInR22mJ7iCJEQ"
 
+
+
     //console.log(url);
 
     createScale();
@@ -56,6 +78,11 @@ function showTorotoMap(nameValue = null) {
     $.getJSON(url, function(data) {
         $.getJSON("./data/toronto.geojson", function(myLines) {
             d3.csv("./data/covid_cases_total.csv").then(data2 => {
+
+                    positionAnalysisFoo = [data.results[0].geometry.location.lat, data.results[0].geometry.location.lng];
+
+
+                    console.log(positionAnalysisFoo);
 
                     var dictForTotal = new Object();
                     //console.log(data2);
@@ -436,14 +463,78 @@ newNewData = JSON.stringify({ "lac": 60, "lng": 40 });
 
 console.log(newNewData);
 
-function sendRequest() {
+function sendRequest(requestDetails) {
+    console.log(basicPosition);
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "http://localhost:5000/foo",
-        data: JSON.stringify({ "lac": 60, "lng": 40 }),
-        success: function(Adata) {
-            console.log(Adata);
+        data: JSON.stringify({ "lng": basicPosition[0], "lac": basicPosition[1] }),
+        success: function(AAdata) {
+
+            console.log(AAdata.result);
+
+            if (requestDetails == 'nearest') {
+                for (let i = 0; i < markersForCommunity.length; i++) {
+                    map.removeLayer(markersForCommunity[i]);
+                }
+                markersForCommunity = [];
+                for (let i = 0; i < AAdata.result.nearest.length; i++) {
+                    var popupModifier = AAdata.result.nearest[i]["PHU"];
+                    var popupContent = "<strong>Name of the Recommended Place(By Distance)</strong><br/>" +
+                        popupModifier +
+                        "<br/>" + AAdata.result.nearest[i]["address"];
+
+                    let lat1 = +AAdata.result.nearest[i]["X"];
+                    let lng1 = +AAdata.result.nearest[i]["Y"];
+
+                    markersForCommunity.push(L.marker([lng1, lat1], { icon: goldIcon })
+                        .bindPopup(popupContent)
+                        .addTo(map));
+
+                }
+            } else if (requestDetails == 'nearest_safest') {
+                for (let i = 0; i < markersForCommunity.length; i++) {
+                    map.removeLayer(markersForCommunity[i]);
+                }
+                markersForCommunity = [];
+                for (let i = 0; i < AAdata.result.nearest_safest.length; i++) {
+                    var popupModifier = AAdata.result.nearest_safest[i]["PHU"];
+                    var popupContent = "<strong>Name of the Recommended Place(By Distance and Safety)</strong><br/>" +
+                        popupModifier +
+                        "<br/>" + AAdata.result.nearest_safest[i]["address"];
+
+                    let lat1 = +AAdata.result.nearest_safest[i]["X"];
+                    let lng1 = +AAdata.result.nearest_safest[i]["Y"];
+
+                    markersForCommunity.push(L.marker([lng1, lat1], { icon: goldIcon })
+                        .bindPopup(popupContent)
+                        .addTo(map));
+
+                }
+            } else {
+
+                for (let i = 0; i < markersForCommunity.length; i++) {
+                    map.removeLayer(markersForCommunity[i]);
+                }
+                markersForCommunity = [];
+                for (let i = 0; i < AAdata.result.nearest_walk_in.length; i++) {
+                    var popupModifier = AAdata.result.nearest_walk_in[i]["PHU"];
+                    var popupContent = "<strong>Name of the Recommended Place(By Nearest with walkin features)</strong><br/>" +
+                        popupModifier +
+                        "<br/>" + AAdata.result.nearest_walk_in[i]["address"];
+
+                    let lat1 = +AAdata.result.nearest_walk_in[i]["X"];
+                    let lng1 = +AAdata.result.nearest_walk_in[i]["Y"];
+
+                    markersForCommunity.push(L.marker([lng1, lat1], { icon: goldIcon })
+                        .bindPopup(popupContent)
+                        .addTo(map));
+
+                }
+            }
+
+
         }
     });
 }
@@ -468,4 +559,4 @@ if (window.location.hash === '#some_id') {
 //Auto-initialization
 showTorotoMap();
 changeWidgets();
-sendRequest();
+//sendRequest();
