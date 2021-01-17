@@ -1,16 +1,7 @@
 "use strict";
 
 const { LoginModel, SignUpModel } = require("../model/authModel");
-const { saltedHash, db, aesDecrypt, aesEncrypt } = require("../utils/firebase");
-
-function isLogin(req, res, next) {
-    const { Token } = req.cookies;
-    if (Token) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
-}
+const { saltedHash, db } = require("../utils/firebase");
 
 const postLogin = async (req, res, next) => {
     try {
@@ -38,7 +29,8 @@ const postLogin = async (req, res, next) => {
             const record = query[0];
             const id = record.id;
             console.log(`User ${logInfo.email} with doc id ${id} logged in successfully`);
-            res.cookie("Token", aesEncrypt(id, saltedHash(logInfo.email)));
+            res.cookie("Token", id, { signed: true });
+            res.cookie("User", logInfo.email);
             res.redirect("/map");
             res.end();
         } else {
@@ -63,7 +55,8 @@ const postSignUp = async (req, res, next) => {
             };
             const record = await db.collection("user").add(userInfo);
             if (record.id) {
-                res.cookie("Token", aesEncrypt(record.id, saltedHash(regInfo.email)));
+                res.cookie("Token", record.id, { signed: true });
+                res.cookie("User", regInfo.email);
                 res.redirect("/map");
                 res.end();
             }

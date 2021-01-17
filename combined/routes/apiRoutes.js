@@ -31,6 +31,9 @@ router.get("/testing", function (req, res) {
     res.send({ text: "API works" });
 });
 
+const { getUsername } = require("../controller/userInfoController");
+router.get("/username", getUsername);
+
 //! this two lines works after firebase is properly configured
 //！ const exampleFirebaseRoutes = require("./exampleFirebaseRoutes");
 //！ router.use("/", exampleFirebaseRoutes);
