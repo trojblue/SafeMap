@@ -422,23 +422,23 @@ function updateTorontoMap(switchingChoice = null) {
     if (switchingChoice == null || switchingChoice == "default") {
         var nameValue = document.getElementById("searchBar").value;
         switchingData = "default";
-        document.getElementById("topicOfMap").innerHTML = "Filter by Your District Name";
+        document.getElementById("topicOfMap").innerHTML = "Filter by: <b>Districts</b>";
         showTorotoMap(nameValue);
     } else if (switchingChoice == "testing") {
         switchingData = "testing";
         var nameValue = document.getElementById("searchBar").value;
-        document.getElementById("topicOfMap").innerHTML = "Filter by Neighboring Testing Areas";
+        document.getElementById("topicOfMap").innerHTML = "Filter by: <b>Neighboring Testing Sites</b>";
         showTorotoMap(nameValue);
     } else if (switchingChoice == "pharmacy") {
         switchingData = "pharmacy";
         var nameValue = document.getElementById("searchBar").value;
         showTorotoMap(nameValue);
-        document.getElementById("topicOfMap").innerHTML = "Filter by Nearby Pharmacies";
+        document.getElementById("topicOfMap").innerHTML = "Filter by: <b>Nearby Pharmacies</b>";
     } else if (switchingChoice == "subway") {
         var nameValue = document.getElementById("searchBar").value;
         switchingData = "subway";
         showTorotoMap(nameValue);
-        document.getElementById("topicOfMap").innerHTML = "Filter by Subways";
+        document.getElementById("topicOfMap").innerHTML = "Filter by: <b>Subways</b>";
     } else if (switchingChoice == "search") {
         var nameValue = document.getElementById("searchBar").value;
         showTorotoMap(nameValue);
