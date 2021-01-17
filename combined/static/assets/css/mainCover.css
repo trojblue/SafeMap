@@ -14,6 +14,31 @@
 }
 
 }
+.bg-map {  top: 0;   left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  background:#FFFBFE;
+  padding: 0px;
+}
+
+.front-box {   
+  display: block;
+  position: absolute;
+  top: 22%;   left: 50%;
+  -webkit-transform:translateX(-50%);
+  width: 80vw;
+  height: 50vh;
+  z-index: 1001;
+  background:rgba(222,222,222,.9);
+  padding: 20px;
+  
+  border-radius: 12px;
+  box-shadow: .5px 4px 20px rgba(0,0,0,.5);;
+/*     filter: blur(25px);   */
+}
 
 h1.main-title {
   font-family: 'Roboto';
