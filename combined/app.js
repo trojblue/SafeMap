@@ -18,6 +18,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/favicon.ico', express.static('/favicon.ico'));
+
 
 //setting up swagger
 const specs = swaggerJsonDoc(SWAGGER_OPTION);
