@@ -13,6 +13,30 @@
     width:20em!important;
 }
 
+@media (min-width: 1000px){
+  h1.main-title{
+    font-family: 'Roboto';
+    /*width: 450px;*/
+    /*height: 168px;*/
+    /*left: 116px;*/
+    top: 198px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 60px;
+    line-height: 84px;
+    color: #13262F;
+    margin-top: 1.4em;
+  }
+}
+
+@media (max-width: 1000px){
+  h1.main-title{
+    font-size:3rem!important;
+    line-height: 3rem!important;
+  }
+}
+
 }
 .bg-map {  top: 0;   left: 0;
   width: 100vw;
@@ -30,7 +54,7 @@
   top: 22%;   left: 50%;
   -webkit-transform:translateX(-50%);
   width: 80vw;
-  height: 50vh;
+  height: 60vh;
   z-index: 1001;
   background:rgba(222,222,222,.9);
   padding: 20px;
@@ -49,10 +73,9 @@ h1.main-title {
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  font-size: 60px;
-  line-height: 84px;
+  font-size: 2rem;
+  line-height: 2rem;
   color: #13262F;
-  margin-top: 1.4em;
 }
 
 h2.headings {
@@ -71,10 +94,6 @@ h2.headings {
 }
 
 h5.map-code {
-  position: absolute;
-  /*width: 131px;*/
-  /*height: 28px;*/
-  /*left: 116px;*/
   top: 60px;
   font-family: Roboto;
   font-style: normal;
