@@ -124,7 +124,7 @@ router.get("/location", getLocations);
 /**
  * @swagger
  * /location:
- *   post:
+ *   put:
  *     description: Add 1 location to user's favorite
  *     tags:
  *       - UserInfo
@@ -144,7 +144,7 @@ router.get("/location", getLocations);
  *                      - 0: Success
  *                      - 100: Not Logged In
  */
-router.post("/location", addLocation);
+router.put("/location", addLocation);
 
 module.exports = {
     routes: router,
