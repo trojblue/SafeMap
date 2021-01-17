@@ -8,6 +8,7 @@ const getAllLocations = async function (id) {
         .get()
         .then((doc) => {
             if (doc.exists) {
+                console.log(doc.data());
                 return doc.data().favorite_location;
             }
             return [];
@@ -24,7 +25,7 @@ const addLocation = async function (req, res) {
         const { User } = req.cookies;
         if (Token && User && (await tokenCheck(Token, User))) {
             //user is logged in
-            const locations = getAllLocations(Token);
+            const locations = await getAllLocations(Token);
             const newLocation = {
                 latitude: req.body.latitude,
                 longitude: req.body.longitude,
@@ -33,7 +34,7 @@ const addLocation = async function (req, res) {
             locations.push(newLocation);
             const users = db.collection("user").doc(Token);
             const query = await users.update({
-                favorite_location: query,
+                favorite_location: locations,
             });
             res.send({
                 code: 0,
@@ -53,7 +54,7 @@ const getLocations = async function (req, res) {
         const { User } = req.cookies;
         if (Token && User && (await tokenCheck(Token, User))) {
             //user is logged in
-            const locations = getAllLocations(Token);
+            const locations = await getAllLocations(Token);
             res.send({
                 code: 0,
                 data: locations,

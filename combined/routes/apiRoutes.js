@@ -126,6 +126,22 @@ router.get("/location", getLocations);
  * /location:
  *   put:
  *     description: Add 1 location to user's favorite
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               longitude: number
+ *               latitude: number
+ *               name: string
+ *             example:
+ *               {
+ *                   longitude: 123,
+ *                   latitude: 456,
+ *                  name: "fake"
+ *               }
  *     tags:
  *       - UserInfo
  *     security:
