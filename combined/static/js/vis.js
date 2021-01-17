@@ -394,7 +394,7 @@ function createScale() {
         .range(['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026']);
 
     d3.select("#svg-color-ordinal").html("");
-    d3.select("#svg-color-ordinal").append("svg").attr("height", 500);
+    d3.select("#svg-color-ordinal").append("svg").attr("height", 270).attr("width", 130);
 
     var svg = d3.select("#svg-color-ordinal svg");
 
