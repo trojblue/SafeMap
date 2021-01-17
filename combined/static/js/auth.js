@@ -30,12 +30,14 @@ function SubmitLogin() {
     });
 }
 
-function changeLoginStatus(){
-    var cookie = document.cookie;
+function readCookie(){
+    //作废
+        var cookie = document.cookie;
     console.log(cookie);
 
     // https://gist.github.com/rendro/525bbbf85e84fa9042c2#gistcomment-2784930
-    var changedCookie = document.cookie
+    //cookie的 hash-array
+    var cookieArray = document.cookie
     .split(';')
     .reduce((res, c) => {
       const [key, val] = c.trim().split('=').map(decodeURIComponent)
@@ -46,23 +48,30 @@ function changeLoginStatus(){
         return Object.assign(res, { [key]: val })
       }
     }, {});
-    console.log(changedCookie);
-    console.log(changedCookie["grav-tabs-state"]["tab-content.options.advanced.features"]);
+    //读取cookie以后把
+    console.log(cookieArray);
+    console.log(cookieArray["grav-tabs-state"]["User"]);
 
-//     if (cookie.length > 0) {
-//         c_start = document.cookie.indexOf(c_name + "=");
-//     if (c_start != -1) {
-//         c_start = c_start + c_name.length + 1;
-//         c_end = document.cookie.indexOf(";", c_start);
-//         if (c_end == -1) {
-//             c_end = document.cookie.length;
-//         }
-//         return unescape(document.cookie.substring(c_start, c_end));
-//             }
-//         }
-// return "";
-//     document.getElementById("loginButton");
-//     document.getElementById("signupButton");
+    document.getElementById("loginButton");
+    document.getElementById("signupButton");
+}
+
+function changeLoginStatus(){
+    //code: 0, 100, 101
+    //data: username / fail reason
+    $.getJSON("http://localhost:3000/api/v1/username", function(data6) {
+        let code = data6["code"];
+        let data = data6["data"];
+        console.log(code + ' ' + data);
+        if (code == 0){ //success
+            console.log("login success");
+            document.getElementById("loginButton").remove();
+            document.getElementById("signupButton").innerHTML = data;
+            document.getElementById("signupButton").href = "#";
+        }else {
+            console.log("login fail");
+        }
+    });
 }
 
 //Auto-initialization
