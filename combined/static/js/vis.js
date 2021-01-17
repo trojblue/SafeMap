@@ -166,7 +166,7 @@ function showTorotoMap(nameValue = null) {
                                 var urlForCommunity = "https://maps.googleapis.com/maps/api/geocode/json?&address=" + urlReplacer2 + "&key=AIzaSyCE49BN6D8b2asUONTB1kInR22mJ7iCJEQ";
                                 $.getJSON(urlForCommunity, function(newData) {
                                     var popupModifier = data2[i]["Neighbourhood Name"];
-                                    var popupContent = "<strong>Name of Neighborhood</strong><br/>" + popupModifier + "<br/>" + dictForTotal[data2[i]["Neighbourhood ID"]] * 100 + "%";
+                                    var popupContent = "<strong>Name of Neighborhood</strong><br/>" + popupModifier + "<br/>";
                                     //console.log(newData);
                                     let lat1 = newData.results[0].geometry.location.lat;
                                     let lng1 = newData.results[0].geometry.location.lng;
