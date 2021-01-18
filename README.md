@@ -208,22 +208,5 @@ I want to thank everyone for providing us the opportunity to showcase this produ
 
 
 
-<<<<<<< HEAD
-
-
-
-
-=======
-`combined`: main folder of operation;  merging files and changing functions; used as git `/dev` branch
-
-other folders: status updates and stashes
-
-
-
-demo site: `map.gkd.icu`
->>>>>>> d1ff4325de5949fc8d0c55088484d69ca3aa127b
-
-
-
 
 
