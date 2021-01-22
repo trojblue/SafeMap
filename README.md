@@ -144,7 +144,7 @@ To run the repo as a website:
 
 1. run `rec.py` in `/python-xxl`
 2. run command `yarn start` in `/combined`
-3. if you are running it in a hosted environment, make sure the `3000` and `5000` ports are open on the server.
+3. if you are running it in a hosted environment, make sure that ports `3000` and `5000` are open on the server.
 
 
 
@@ -197,10 +197,10 @@ I want to thank everyone for providing us the opportunity to showcase this produ
 [forks-url]: https://github.com/Trojblue/SafeMap/network/members
 [stars-shield]: https://img.shields.io/github/stars/trojblue/SafeMap.svg?style=for-the-badge
 [stars-url]: https://github.com/trojblue/SafeMap.svg/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/trojblue/SafeMap.svg?style=for-the-badge
 [issues-url]: https://github.com/trojblue/SafeMap/issues
 [license-shield]: https://img.shields.io/github/license/trojblue/SafeMap.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/Trojblue/SafeMap/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/xinlei-andrew-xu-0b12ba181/
 [product-screenshot]: docs/img/homepage.png
